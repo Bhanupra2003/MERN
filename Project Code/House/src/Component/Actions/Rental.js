@@ -17,7 +17,7 @@ import {
 import { toast } from 'react-toastify';
 
 // Setting a base URL for axios
-axios.defaults.baseURL = 'http://localhost:4000/api/rental';
+axios.defaults.baseURL = 'http://localhost:5000/api/rental';
 
 // Helper function to handle errors
 const handleError = (error, dispatch, failureAction) => {

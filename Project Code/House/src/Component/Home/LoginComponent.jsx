@@ -19,6 +19,7 @@ const LoginComponent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(data);
         if (data.email === "admin@gmail.com" && data.password === "admin") {
             dispatch(login(data.email, data.password));
         } else {

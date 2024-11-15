@@ -43,10 +43,25 @@ export const ViewRental = (name) => async (dispatch) => {
     dispatch(viewrentalRequest());
     const res = await axios.get(`/api/admin/rentals?name=${name}`);
     dispatch(viewrentalSuccess(res.data));
-    res.data.message.forEach((mes) => toast.success(mes));
-  } catch (error) {
-    dispatch(viewrentalFailure(error));
-    error.response.data.message.forEach((err) => toast.error(err));
+
+    if (Array.isArray(res.data.message)) {
+      res.data.message.forEach((mes) => toast.success(mes));
+    }
+
+  setTimeout(() => {
+      window.location.href = '/rental/dashboard';
+    }, 1000);
+
+  }
+  catch (error) {
+    const errorMessage = error.response?.data?.message || ["An unexpected error occurred."];
+    dispatch(loginFailure({ message: errorMessage }));
+
+    if (Array.isArray(errorMessage)) {
+      errorMessage.forEach((err) => toast.error(err));
+    } else {
+      toast.error(errorMessage);
+    }
   }
 };
 
